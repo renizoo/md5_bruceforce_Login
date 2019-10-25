@@ -42,7 +42,7 @@ while verify:
 
             for j in range(len(lines) - 1):
                 line = lines[j+1].split(";", 1)
-                print(line)
+                # print(line)
                 # print(line[1])
                 if line[0] == login and line[1].rstrip("\n") == hashi:
                     print("Senha digitada em md5: " + hashi)
@@ -99,5 +99,5 @@ while verify:
                     print("\n[!]", n, "-character finished in %s seconds ---" % (time.time() - characterstart_time))
                     if loop_control:
                         break
-            print("Tempo para quebrar 4 hashs: {0}".format(time.time() - comeco))
+            print("Tempo para quebrar {0} hashs: {1}".format(len(lines) - 1, time.time() - comeco))
             break
