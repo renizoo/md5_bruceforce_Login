@@ -15,18 +15,18 @@ def animate():
 
 verify = True
 
-# comeco
+# comeco abrindo o arquivo
 
 with open("cad.txt", "r+") as file:
     lines = file.readlines()
 
 # print("Usuario cadastrados:\n")
 # print(lines)
-
+# mostrando as senhas cadastradas
 for j in range(len(lines) - 1):
     line = lines[j+1].split(";", 1)
     print("Senha do usuario "+line[0]+": "+str(j+1)+": "+line[1].rstrip("\n"))
-
+# loop para decisao
 while verify:
 
     escolha = input("""    ______________________
