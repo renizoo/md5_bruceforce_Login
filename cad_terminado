@@ -1,0 +1,60 @@
+import hashlib
+from random import randint
+
+escolha = input("Deseja cadastrar usuario normalmente(1) \nMaior seguranca e diculdade de aceeeso!?(2)\n")
+
+if escolha == "1":
+
+    verify = True
+    cont = 0
+    with open('cad.txt', 'w+') as file:
+        file.write("usuario;senha\n")
+        while verify:
+            cont +=1
+            usuario = input("Digite o usuario\n")
+            senha = input("Digite a senha\n")
+            while len(senha) > 4:
+                senha = input("Digite a senha, com no maximo 4 caracteres\n")
+            hashi = hashlib.md5(senha.encode()).hexdigest()
+            file.write((usuario + ";" + hashi + '\n'))
+            teste = input("Deseja sair ? Digite 1 para continuar 2 para sair\n")
+            if teste == "1":
+                verify = True
+            else:
+                break
+
+if escolha == "2":
+    verify = True
+    cont = 0
+    with open('cadDificultar.txt', 'w+') as file:
+        file.write("usuario;senha;randomN\n")
+        while verify:
+            cont += 1
+            usuario = input("Digite o usuario\n")
+            senha = input("Digite a senha\n")
+            hashlopp = randint(10, 99)
+            while len(senha) > 4:
+                senha = input("Digite a senha, com no maximo 4 caracteres\n")
+            hashi = hashlib.md5(senha.encode()).hexdigest()
+            hashi2 = hashlib.md5(hashi.encode()).hexdigest()
+            # comeca a lista para armazenar
+            lista = []
+            lista.append(hashi)
+            lista.append(hashi2)
+            for i in range(hashlopp):
+                hashii = (hashlib.md5(lista[i - 1].encode()).hexdigest())
+                # print(hashii)
+                lista.append(hashii)
+            # comeca a grava no arquivo
+            file.write((usuario + ";" + str(lista[-1]) + ";" + str(hashlopp) + '\n'))
+            teste = input("Deseja sair ? Digite 1 para continuar 2 para sair\n")
+            if teste == "1":
+                verify = True
+            else:
+                break
+print("Usuarios cadastrados com sucesso!!!")
+
+# user = input("senha")
+# hashi = hashlib.md5(user.encode()).hexdigest()
+# print(hashi)
+#
